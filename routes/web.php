@@ -49,7 +49,7 @@ Route::get('/profile', fn() => view('pages.profile', ['title' => 'Profile']))->n
 Route::get('/form-elements', fn() => view('pages.form.form-elements', ['title' => 'Form Elements']))->name('form-elements');
 Route::get('/basic-tables', fn() => view('pages.tables.basic-tables', ['title' => 'Basic Tables']))->name('basic-tables');
 Route::get('/blank', fn() => view('pages.blank', ['title' => 'Blank']))->name('blank');
-Route::get('/error-404', fn() => view('pages.errors.error-404', ['title' => 'Error 404']))->name('error-404');
+Route::get('/error-404', fn() => abort(404))->name('error-404');
 Route::get('/line-chart', fn() => view('pages.chart.line-chart', ['title' => 'Line Chart']))->name('line-chart');
 Route::get('/bar-chart', fn() => view('pages.chart.bar-chart', ['title' => 'Bar Chart']))->name('bar-chart');
 Route::get('/alerts', fn() => view('pages.ui-elements.alerts', ['title' => 'Alerts']))->name('alerts');
