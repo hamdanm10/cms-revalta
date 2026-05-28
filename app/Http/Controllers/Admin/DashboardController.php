@@ -7,8 +7,8 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function show(): View
     {
-        return view('pages.admin.dashboard.index', ['title' => 'CMS Revalta']);
+        return view('pages.admin.dashboard.show', ['title' => 'Dashboard']);
     }
 }
