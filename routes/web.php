@@ -1,106 +1,62 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\JobOpeningsController;
+use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 
-// dashboard pages
-Route::get('/', function () {
-    return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
-})->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 
-// calender pages
-Route::get('/calendar', function () {
-    return view('pages.calender', ['title' => 'Calendar']);
-})->name('calendar');
+Route::middleware('guest')->group(function () {
+    Route::singleton('session', SessionController::class)->creatable()->only(['create', 'store']);
+    Route::resource('registrations', RegistrationController::class)->only(['create', 'store']);
+});
 
-// profile pages
-Route::get('/profile', function () {
-    return view('pages.profile', ['title' => 'Profile']);
-})->name('profile');
+Route::delete('/session', [SessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('session.destroy');
 
-// form pages
-Route::get('/form-elements', function () {
-    return view('pages.form.form-elements', ['title' => 'Form Elements']);
-})->name('form-elements');
+/*
+|--------------------------------------------------------------------------
+| Protected Admin Routes
+|--------------------------------------------------------------------------
+*/
 
-// tables pages
-Route::get('/basic-tables', function () {
-    return view('pages.tables.basic-tables', ['title' => 'Basic Tables']);
-})->name('basic-tables');
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::singleton('dashboard', DashboardController::class)->only(['show']);
+    Route::resource('job-openings', JobOpeningsController::class);
+});
 
-// pages
+/*
+|--------------------------------------------------------------------------
+| Root Redirect
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/blank', function () {
-    return view('pages.blank', ['title' => 'Blank']);
-})->name('blank');
+Route::get('/', fn() => redirect()->route('admin.dashboard'));
 
-// error pages
-Route::get('/error-404', function () {
-    return view('pages.errors.error-404', ['title' => 'Error 404']);
-})->name('error-404');
+/*
+|--------------------------------------------------------------------------
+| Other Routes
+|--------------------------------------------------------------------------
+*/
 
-// chart pages
-Route::get('/line-chart', function () {
-    return view('pages.chart.line-chart', ['title' => 'Line Chart']);
-})->name('line-chart');
-
-Route::get('/bar-chart', function () {
-    return view('pages.chart.bar-chart', ['title' => 'Bar Chart']);
-})->name('bar-chart');
-
-
-// authentication pages
-Route::get('/signin', function () {
-    return view('pages.auth.signin', ['title' => 'Sign In']);
-})->name('signin');
-
-Route::get('/signup', function () {
-    return view('pages.auth.signup', ['title' => 'Sign Up']);
-})->name('signup');
-
-// ui elements pages
-Route::get('/alerts', function () {
-    return view('pages.ui-elements.alerts', ['title' => 'Alerts']);
-})->name('alerts');
-
-Route::get('/avatars', function () {
-    return view('pages.ui-elements.avatars', ['title' => 'Avatars']);
-})->name('avatars');
-
-Route::get('/badge', function () {
-    return view('pages.ui-elements.badges', ['title' => 'Badges']);
-})->name('badges');
-
-Route::get('/buttons', function () {
-    return view('pages.ui-elements.buttons', ['title' => 'Buttons']);
-})->name('buttons');
-
-Route::get('/image', function () {
-    return view('pages.ui-elements.images', ['title' => 'Images']);
-})->name('images');
-
-Route::get('/videos', function () {
-    return view('pages.ui-elements.videos', ['title' => 'Videos']);
-})->name('videos');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/calendar', fn() => view('pages.calender', ['title' => 'Calendar']))->name('calendar');
+Route::get('/profile', fn() => view('pages.profile', ['title' => 'Profile']))->name('profile');
+Route::get('/form-elements', fn() => view('pages.form.form-elements', ['title' => 'Form Elements']))->name('form-elements');
+Route::get('/basic-tables', fn() => view('pages.tables.basic-tables', ['title' => 'Basic Tables']))->name('basic-tables');
+Route::get('/blank', fn() => view('pages.blank', ['title' => 'Blank']))->name('blank');
+Route::get('/error-404', fn() => abort(404))->name('error-404');
+Route::get('/line-chart', fn() => view('pages.chart.line-chart', ['title' => 'Line Chart']))->name('line-chart');
+Route::get('/bar-chart', fn() => view('pages.chart.bar-chart', ['title' => 'Bar Chart']))->name('bar-chart');
+Route::get('/alerts', fn() => view('pages.ui-elements.alerts', ['title' => 'Alerts']))->name('alerts');
+Route::get('/avatars', fn() => view('pages.ui-elements.avatars', ['title' => 'Avatars']))->name('avatars');
+Route::get('/badge', fn() => view('pages.ui-elements.badges', ['title' => 'Badges']))->name('badges');
+Route::get('/buttons', fn() => view('pages.ui-elements.buttons', ['title' => 'Buttons']))->name('buttons');
+Route::get('/image', fn() => view('pages.ui-elements.images', ['title' => 'Images']))->name('images');
+Route::get('/videos', fn() => view('pages.ui-elements.videos', ['title' => 'Videos']))->name('videos');
