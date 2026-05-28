@@ -3,40 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Services\Auth\RegistrationService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class RegistrationController extends Controller
 {
+    public function __construct(private RegistrationService $registrationService) {}
+
     public function create(): View
     {
-        return view('pages.auth.signup');
+        return view('pages.registrations.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'fname'                 => ['required', 'string', 'max:255'],
-            'lname'                 => ['required', 'string', 'max:255'],
-            'email'                 => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
-            'password'              => ['required', 'confirmed', Password::defaults()],
-            'password_confirmation' => ['required', 'string'],
-        ]);
-
-        $user = User::create([
-            'name'     => trim($request->fname.' '.$request->lname),
-            'email'    => $request->email,
-            'password' => $request->password,
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
+        $this->registrationService->register($request->validated());
 
         return redirect()->route('admin.dashboard');
     }

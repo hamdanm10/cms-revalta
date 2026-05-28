@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Requests\Auth;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
+
+class RegisterRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'confirmed', Password::defaults()],
+            'password_confirmation' => ['required', 'string'],
+        ];
+    }
+}
