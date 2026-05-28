@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\JobOpeningsController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,8 @@ Route::delete('/session', [SessionController::class, 'destroy'])
 */
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::singleton('dashboard', DashboardController::class)->only(['show']);
+    Route::resource('job-openings', JobOpeningsController::class);
 });
 
 /*
