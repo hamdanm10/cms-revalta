@@ -11,7 +11,7 @@ class RegistrationService
     public function register(array $data): User
     {
         $user = User::create([
-            'name'     => trim($data['fname'].' '.$data['lname']),
+            'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => $data['password'],
         ]);
