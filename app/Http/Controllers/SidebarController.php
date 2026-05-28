@@ -38,7 +38,7 @@ class SidebarController extends Controller
                     ],
                     [
                         'icon' => 'cart-icon',
-                        'name' => 'E-commerce',
+                        'name' => 'CMS Revalta',
                         'new' => true,
                         'subItems' => [
                             ['name' => 'Products', 'path' => '/products-list'],
