@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\BlogCategoriesController;
 use App\Http\Controllers\Admin\BlogsController;
 use App\Http\Controllers\Admin\PortfolioCategoriesController;
 use App\Http\Controllers\Admin\PortfoliosController;
-use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::singleton('session', SessionController::class)->creatable()->only(['create', 'store']);
-    Route::resource('registrations', RegistrationController::class)->only(['create', 'store']);
 });
 
 Route::delete('/session', [SessionController::class, 'destroy'])
