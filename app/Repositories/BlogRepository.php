@@ -20,6 +20,14 @@ class BlogRepository
             ->paginate($perPage);
     }
 
+    public function incrementViewsBySlug(string $slug): bool
+    {
+        return (bool) Blog::query()
+            ->where('status', 'published')
+            ->where('slug', $slug)
+            ->increment('views');
+    }
+
     public function findBySlugApi(string $slug): ?Blog
     {
         return Blog::query()

@@ -6,25 +6,9 @@ use App\Http\Controllers\Admin\BlogCategoriesController;
 use App\Http\Controllers\Admin\BlogsController;
 use App\Http\Controllers\Admin\PortfolioCategoriesController;
 use App\Http\Controllers\Admin\PortfoliosController;
-use App\Http\Controllers\Api\JobOpeningsController as ApiJobOpeningsController;
-use App\Http\Controllers\Api\BlogsController as ApiBlogsController;
-use App\Http\Controllers\Api\PortfoliosController as ApiPortfoliosController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Public API Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware('throttle:60,1')->prefix('api')->name('api.')->group(function () {
-    Route::apiResource('job-openings', ApiJobOpeningsController::class)->only(['index']);
-    Route::apiResource('portfolios', ApiPortfoliosController::class)->only(['index']);
-    Route::apiResource('blogs', ApiBlogsController::class)->only(['index']);
-    Route::get('blogs/{slug}', [ApiBlogsController::class, 'show'])->name('api.blogs.show');
-});
 
 /*
 |--------------------------------------------------------------------------
