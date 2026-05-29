@@ -25,7 +25,7 @@ class SessionController extends Controller
             $request->boolean('remember')
         );
 
-        return redirect()->intended(route('admin.dashboard'));
+        return redirect()->intended(route('admin.dashboard.show'));
     }
 
     public function destroy(Request $request): RedirectResponse
