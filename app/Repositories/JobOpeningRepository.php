@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\JobOpening;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class JobOpeningRepository
 {
@@ -16,5 +17,22 @@ class JobOpeningRepository
             ->when($status, fn($q, $v) => $q->where('status', $v))
             ->latest()
             ->paginate($perPage);
+    }
+
+    public function stats(): array
+    {
+        return [
+            'total'  => JobOpening::count(),
+            'open'   => JobOpening::where('status', 'open')->count(),
+            'closed' => JobOpening::where('status', 'closed')->count(),
+        ];
+    }
+
+    public function recentList(int $limit = 5): Collection
+    {
+        return JobOpening::query()
+            ->latest()
+            ->limit($limit)
+            ->get(['id', 'title', 'work_type', 'status', 'created_at']);
     }
 }

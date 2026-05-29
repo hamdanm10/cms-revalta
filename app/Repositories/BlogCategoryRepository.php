@@ -24,4 +24,9 @@ class BlogCategoryRepository
             ->orderBy('name')
             ->get();
     }
+
+    public function totalCount(): int
+    {
+        return BlogCategory::count();
+    }
 }

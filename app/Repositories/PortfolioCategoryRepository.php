@@ -16,6 +16,11 @@ class PortfolioCategoryRepository
             ->get();
     }
 
+    public function totalCount(): int
+    {
+        return PortfolioCategory::count();
+    }
+
     public function paginate(?string $search, int $perPage = 10): LengthAwarePaginator
     {
         return PortfolioCategory::query()

@@ -18,4 +18,13 @@ class PortfolioRepository
             ->latest()
             ->paginate($perPage);
     }
+
+    public function stats(): array
+    {
+        return [
+            'total'     => Portfolio::count(),
+            'published' => Portfolio::where('status', 'published')->count(),
+            'draft'     => Portfolio::where('status', 'draft')->count(),
+        ];
+    }
 }
