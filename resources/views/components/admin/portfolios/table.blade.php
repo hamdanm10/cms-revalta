@@ -20,11 +20,11 @@
                 {{-- Search --}}
                 <input id="portfolio-search" type="search" value="{{ $search }}"
                     placeholder="Search title..."
-                    class="w-full max-w-xs rounded-lg border border-gray-200 bg-transparent px-4 py-2 text-theme-sm text-gray-700 outline-none placeholder:text-gray-400 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:text-gray-300 dark:placeholder:text-gray-600" />
+                    class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full max-w-xs rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
 
                 {{-- Category --}}
                 <select id="portfolio-category"
-                    class="rounded-lg border border-gray-200 bg-transparent px-4 py-2 text-theme-sm text-gray-700 outline-none focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                    class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
                     <option value="">All Categories</option>
                     @foreach ($categories as $cat)
                         <option value="{{ $cat->id }}" {{ $categoryId == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
@@ -33,7 +33,7 @@
 
                 {{-- Status --}}
                 <select id="portfolio-status"
-                    class="rounded-lg border border-gray-200 bg-transparent px-4 py-2 text-theme-sm text-gray-700 outline-none focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                    class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
                     <option value="">All Statuses</option>
                     <option value="published" {{ $status === 'published' ? 'selected' : '' }}>Published</option>
                     <option value="draft" {{ $status === 'draft' ? 'selected' : '' }}>Draft</option>
