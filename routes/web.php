@@ -58,19 +58,3 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
 Route::get('/', fn() => redirect()->route('admin.dashboard.show'));
 
-/*
-|--------------------------------------------------------------------------
-| Other Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/calendar', fn() => view('pages.calender', ['title' => 'Calendar']))->name('calendar');
-Route::get('/profile', fn() => view('pages.profile', ['title' => 'Profile']))->name('profile');
-Route::get('/line-chart', fn() => view('pages.chart.line-chart', ['title' => 'Line Chart']))->name('line-chart');
-Route::get('/bar-chart', fn() => view('pages.chart.bar-chart', ['title' => 'Bar Chart']))->name('bar-chart');
-Route::get('/alerts', fn() => view('pages.ui-elements.alerts', ['title' => 'Alerts']))->name('alerts');
-Route::get('/avatars', fn() => view('pages.ui-elements.avatars', ['title' => 'Avatars']))->name('avatars');
-Route::get('/badge', fn() => view('pages.ui-elements.badges', ['title' => 'Badges']))->name('badges');
-Route::get('/buttons', fn() => view('pages.ui-elements.buttons', ['title' => 'Buttons']))->name('buttons');
-Route::get('/image', fn() => view('pages.ui-elements.images', ['title' => 'Images']))->name('images');
-Route::get('/videos', fn() => view('pages.ui-elements.videos', ['title' => 'Videos']))->name('videos');
