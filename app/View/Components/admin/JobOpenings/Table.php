@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\admin;
+namespace App\View\Components\admin\JobOpenings;
 
 use Closure;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class JobOpeningsTable extends Component
+class Table extends Component
 {
     public function __construct(
         public readonly LengthAwarePaginator $jobOpenings,
@@ -18,6 +18,6 @@ class JobOpeningsTable extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.admin.job-openings-table');
+        return view('components.admin.job-openings.table');
     }
 }

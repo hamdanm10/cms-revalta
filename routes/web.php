@@ -29,6 +29,8 @@ Route::delete('/session', [SessionController::class, 'destroy'])
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::singleton('dashboard', DashboardController::class)->only(['show']);
+
+    // JOB OPENINGS
     Route::get('job-openings/search', [JobOpeningsController::class, 'search'])->name('job-openings.search');
     Route::resource('job-openings', JobOpeningsController::class);
 });

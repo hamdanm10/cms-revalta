@@ -30,8 +30,15 @@ class JobOpeningsController extends Controller
     {
         ['search' => $search, 'work_type' => $workType, 'status' => $status] = $this->filters($request);
 
-        return response()->view('components.admin.partials.job-openings-results', [
+        return response()->view('components.admin.job-openings.partials.results', [
             'jobOpenings' => $this->repository->paginate($search, $workType, $status),
+        ]);
+    }
+
+    public function create(): View
+    {
+        return view('pages.admin.job-openings.create', [
+            'title' => 'Create Job Opening',
         ]);
     }
 

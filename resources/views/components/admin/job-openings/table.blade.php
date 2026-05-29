@@ -43,7 +43,7 @@
 
         {{-- Results (replaced by AJAX) --}}
         <div id="job-openings-results">
-            @include('components.admin.partials.job-openings-results', ['jobOpenings' => $jobOpenings])
+            @include('components.admin.job-openings.partials.results', ['jobOpenings' => $jobOpenings])
         </div>
 
     </div>
