@@ -23,6 +23,7 @@ Route::middleware('throttle:60,1')->prefix('api')->name('api.')->group(function 
     Route::apiResource('job-openings', ApiJobOpeningsController::class)->only(['index']);
     Route::apiResource('portfolios', ApiPortfoliosController::class)->only(['index']);
     Route::apiResource('blogs', ApiBlogsController::class)->only(['index']);
+    Route::get('blogs/{slug}', [ApiBlogsController::class, 'show'])->name('api.blogs.show');
 });
 
 /*

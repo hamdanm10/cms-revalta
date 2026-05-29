@@ -20,6 +20,15 @@ class BlogRepository
             ->paginate($perPage);
     }
 
+    public function findBySlugApi(string $slug): ?Blog
+    {
+        return Blog::query()
+            ->with('category:id,name')
+            ->where('status', 'published')
+            ->where('slug', $slug)
+            ->first();
+    }
+
     public function paginateApi(?string $search, ?int $categoryId = null, int $perPage = 10): LengthAwarePaginator
     {
         return Blog::query()

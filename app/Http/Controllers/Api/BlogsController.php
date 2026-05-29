@@ -31,6 +31,25 @@ class BlogsController extends Controller
         ]);
     }
 
+    public function show(string $slug): JsonResponse
+    {
+        $blog = $this->repository->findBySlugApi($slug);
+
+        if (! $blog) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Blog not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => [
+                'blog' => $blog,
+            ],
+        ]);
+    }
+
     private function paginationMeta(LengthAwarePaginator $paginator): array
     {
         return [
