@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(fn () => route('session.create'));
         $middleware->redirectUsersTo(fn () => route('admin.dashboard'));
+        $middleware->api(append: [\App\Http\Middleware\ValidateApiToken::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
