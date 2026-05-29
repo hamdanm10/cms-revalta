@@ -83,4 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#job-openings-table')) {
         import('./components/job-openings').then(module => module.initJobOpenings());
     }
+
+    // Portfolio categories search
+    if (document.querySelector('#portfolio-categories-table')) {
+        import('./components/portfolio-categories').then(module => module.initPortfolioCategories());
+    }
 });

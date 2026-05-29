@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobOpeningsController;
+use App\Http\Controllers\Admin\PortfolioCategoriesController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // JOB OPENINGS
     Route::get('job-openings/search', [JobOpeningsController::class, 'search'])->name('job-openings.search');
     Route::resource('job-openings', JobOpeningsController::class);
+
+    // Portfolio Categories
+    Route::get('portfolio-categories/search', [PortfolioCategoriesController::class, 'search'])->name('portfolio-categories.search');
+    Route::resource('portfolio-categories', PortfolioCategoriesController::class);
 });
 
 /*
