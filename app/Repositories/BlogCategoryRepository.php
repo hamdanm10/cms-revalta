@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\BlogCategory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class BlogCategoryRepository
 {
@@ -14,5 +15,13 @@ class BlogCategoryRepository
             ->when($search, fn($q, $s) => $q->where('name', 'like', '%' . $s . '%'))
             ->latest()
             ->paginate($perPage);
+    }
+
+    public function all(): Collection
+    {
+        return BlogCategory::query()
+            ->select(['id', 'name'])
+            ->orderBy('name')
+            ->get();
     }
 }

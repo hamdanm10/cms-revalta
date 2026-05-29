@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobOpeningsController;
 use App\Http\Controllers\Admin\BlogCategoriesController;
+use App\Http\Controllers\Admin\BlogsController;
 use App\Http\Controllers\Admin\PortfolioCategoriesController;
 use App\Http\Controllers\Admin\PortfoliosController;
 use App\Http\Controllers\Auth\RegistrationController;
@@ -33,6 +34,11 @@ Route::delete('/session', [SessionController::class, 'destroy'])
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::singleton('dashboard', DashboardController::class)->only(['show']);
 
+    // Blogs
+    Route::post('blogs/upload-image', [BlogsController::class, 'uploadImage'])->name('blogs.upload-image');
+    Route::get('blogs/search', [BlogsController::class, 'search'])->name('blogs.search');
+    Route::resource('blogs', BlogsController::class);
+
     // Portfolios
     Route::get('portfolios/search', [PortfoliosController::class, 'search'])->name('portfolios.search');
     Route::resource('portfolios', PortfoliosController::class);
@@ -57,4 +63,3 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 */
 
 Route::get('/', fn() => redirect()->route('admin.dashboard.show'));
-
