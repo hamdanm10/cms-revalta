@@ -7,17 +7,13 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class JobOpeningRepository
 {
-    public function paginate(?string $search, int $perPage = 10): LengthAwarePaginator
+    public function paginate(?string $search, ?string $workType = null, ?string $status = null, int $perPage = 10): LengthAwarePaginator
     {
         return JobOpening::query()
             ->select(['id', 'title', 'work_type', 'status', 'created_at'])
-            ->when($search, function ($query, $search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('title', 'like', '%' . $search . '%')
-                        ->orWhere('work_type', 'like', '%' . $search . '%')
-                        ->orWhere('status', 'like', '%' . $search . '%');
-                });
-            })
+            ->when($search, fn($q, $s) => $q->where('title', 'like', '%' . $s . '%'))
+            ->when($workType, fn($q, $v) => $q->where('work_type', $v))
+            ->when($status, fn($q, $v) => $q->where('status', $v))
             ->latest()
             ->paginate($perPage);
     }

@@ -48,4 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#calendar')) {
         import('./components/calendar-init').then(module => module.calendarInit());
     }
+
+    // Job openings search & filter
+    if (document.querySelector('#job-openings-table')) {
+        import('./components/job-openings').then(module => module.initJobOpenings());
+    }
 });
