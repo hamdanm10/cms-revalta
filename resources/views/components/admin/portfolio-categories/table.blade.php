@@ -44,8 +44,7 @@
         </div>
 
         <h4 class="mb-2 text-center text-base font-semibold text-gray-800 dark:text-white/90">Delete Portfolio Category?</h4>
-        <p class="mb-6 text-center text-theme-sm text-gray-500 dark:text-gray-400">This portfolio category will be permanently
-            deleted and cannot be recovered.</p>
+        <p class="mb-6 text-center text-theme-sm text-gray-500 dark:text-gray-400">Are you sure you want to delete this portfolio category?</p>
 
         <div class="flex items-center gap-3">
             <button @click="open = false" type="button"

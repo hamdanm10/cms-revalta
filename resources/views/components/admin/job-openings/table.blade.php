@@ -62,8 +62,7 @@
         </div>
 
         <h4 class="mb-2 text-center text-base font-semibold text-gray-800 dark:text-white/90">Delete Job Opening?</h4>
-        <p class="mb-6 text-center text-theme-sm text-gray-500 dark:text-gray-400">This job opening will be permanently
-            deleted and cannot be recovered.</p>
+        <p class="mb-6 text-center text-theme-sm text-gray-500 dark:text-gray-400">Are you sure you want to delete this job opening?</p>
 
         <div class="flex items-center gap-3">
             <button @click="open = false" type="button"
