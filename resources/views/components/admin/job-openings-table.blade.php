@@ -38,22 +38,22 @@
             <table class="w-full">
                 <thead>
                     <tr class="border-b border-gray-100 dark:border-gray-800">
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">#</p>
                         </th>
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Title</p>
                         </th>
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Work Type</p>
                         </th>
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Status</p>
                         </th>
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Created At</p>
                         </th>
-                        <th class="px-5 py-3 text-left sm:px-6">
+                        <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                             <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Actions</p>
                         </th>
                     </tr>
