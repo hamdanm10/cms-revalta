@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreJobOpeningRequest;
+use App\Models\JobOpening;
 use App\Repositories\JobOpeningRepository;
 use App\Services\Admin\JobOpeningService;
 use Illuminate\Http\RedirectResponse;
@@ -54,6 +55,14 @@ class JobOpeningsController extends Controller
 
         return redirect()->route('admin.job-openings.index')
             ->with('toast', ['type' => 'success', 'message' => 'Job opening created successfully.']);
+    }
+
+    public function destroy(JobOpening $jobOpening): RedirectResponse
+    {
+        $this->service->destroy($jobOpening);
+
+        return redirect()->route('admin.job-openings.index')
+            ->with('toast', ['type' => 'success', 'message' => 'Job opening deleted successfully.']);
     }
 
     private function filters(Request $request): array

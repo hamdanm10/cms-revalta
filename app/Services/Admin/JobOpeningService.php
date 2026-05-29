@@ -6,6 +6,11 @@ use App\Models\JobOpening;
 
 class JobOpeningService
 {
+    public function destroy(JobOpening $jobOpening): void
+    {
+        $jobOpening->delete();
+    }
+
     public function store(array $data): JobOpening
     {
         return JobOpening::create([
