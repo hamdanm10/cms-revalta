@@ -40,6 +40,11 @@ class MenuHelper
         return [
             [
                 'icon' => 'category',
+                'name' => 'Blog Categories',
+                'path' => '/admin/blog-categories',
+            ],
+            [
+                'icon' => 'category',
                 'name' => 'Portfolio Categories',
                 'path' => '/admin/portfolio-categories',
             ],

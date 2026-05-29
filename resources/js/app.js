@@ -93,4 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#portfolios-table')) {
         import('./components/portfolios').then(module => module.initPortfolios());
     }
+
+    // Blog categories search
+    if (document.querySelector('#blog-categories-table')) {
+        import('./components/blog-categories').then(module => module.initBlogCategories());
+    }
 });
