@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApiDocsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobOpeningsController;
 use App\Http\Controllers\Admin\BlogCategoriesController;
@@ -31,6 +32,7 @@ Route::delete('/session', [SessionController::class, 'destroy'])
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::singleton('dashboard', DashboardController::class)->only(['show']);
+    Route::singleton('api-docs', ApiDocsController::class)->only(['show']);
 
     // Blogs
     Route::post('blogs/upload-image', [BlogsController::class, 'uploadImage'])->name('blogs.upload-image');

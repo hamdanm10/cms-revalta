@@ -30,6 +30,17 @@ class MenuHelper
         ];
     }
 
+    public static function getOthersItems()
+    {
+        return [
+            [
+                'icon' => 'api-docs',
+                'name' => 'API Docs',
+                'path' => '/admin/api-docs',
+            ],
+        ];
+    }
+
     public static function getMasterItems()
     {
         return [
@@ -56,7 +67,11 @@ class MenuHelper
             [
                 'title' => 'Master',
                 'items' => self::getMasterItems()
-            ]
+            ],
+            [
+                'title' => 'Others',
+                'items' => self::getOthersItems()
+            ],
         ];
     }
 
@@ -77,6 +92,8 @@ class MenuHelper
             'category' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6zm10 0h6v6h-6zm-10 10h6v6h-6zm10 3a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>',
 
             'portfolio' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2M9 12h6M9 16h6"/></svg>',
+
+            'api-docs' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M10 13l-1 2l1 2M14 13l1 2l-1 2M12 13v4"/></svg>',
         ];
 
         return $icons[$iconName] ?? '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>';
