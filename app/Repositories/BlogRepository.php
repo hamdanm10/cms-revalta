@@ -20,6 +20,18 @@ class BlogRepository
             ->paginate($perPage);
     }
 
+    public function paginateApi(?string $search, ?int $categoryId = null, int $perPage = 10): LengthAwarePaginator
+    {
+        return Blog::query()
+            ->select(['id', 'category_id', 'title', 'slug', 'thumbnail', 'short_description', 'status', 'published_at', 'views', 'created_at'])
+            ->with('category:id,name')
+            ->where('status', 'published')
+            ->when($search, fn($q, $s) => $q->where('title', 'like', '%' . $s . '%'))
+            ->when($categoryId, fn($q, $v) => $q->where('category_id', $v))
+            ->latest()
+            ->paginate($perPage);
+    }
+
     public function stats(): array
     {
         return [
