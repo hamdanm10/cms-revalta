@@ -4,9 +4,18 @@ namespace App\Repositories;
 
 use App\Models\PortfolioCategory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class PortfolioCategoryRepository
 {
+    public function all(): Collection
+    {
+        return PortfolioCategory::query()
+            ->select(['id', 'name'])
+            ->orderBy('name')
+            ->get();
+    }
+
     public function paginate(?string $search, int $perPage = 10): LengthAwarePaginator
     {
         return PortfolioCategory::query()

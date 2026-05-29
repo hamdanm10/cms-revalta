@@ -88,4 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#portfolio-categories-table')) {
         import('./components/portfolio-categories').then(module => module.initPortfolioCategories());
     }
+
+    // Portfolios search & filter
+    if (document.querySelector('#portfolios-table')) {
+        import('./components/portfolios').then(module => module.initPortfolios());
+    }
 });

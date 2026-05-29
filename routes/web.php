@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobOpeningsController;
 use App\Http\Controllers\Admin\PortfolioCategoriesController;
+use App\Http\Controllers\Admin\PortfoliosController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,10 @@ Route::delete('/session', [SessionController::class, 'destroy'])
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::singleton('dashboard', DashboardController::class)->only(['show']);
+
+    // Portfolios
+    Route::get('portfolios/search', [PortfoliosController::class, 'search'])->name('portfolios.search');
+    Route::resource('portfolios', PortfoliosController::class);
 
     // JOB OPENINGS
     Route::get('job-openings/search', [JobOpeningsController::class, 'search'])->name('job-openings.search');
