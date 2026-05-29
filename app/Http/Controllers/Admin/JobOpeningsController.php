@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreJobOpeningRequest;
+use App\Http\Requests\Admin\UpdateJobOpeningRequest;
 use App\Models\JobOpening;
 use App\Repositories\JobOpeningRepository;
 use App\Services\Admin\JobOpeningService;
@@ -42,6 +43,14 @@ class JobOpeningsController extends Controller
         ]);
     }
 
+    public function show(JobOpening $jobOpening): View
+    {
+        return view('pages.admin.job-openings.show', [
+            'title'      => $jobOpening->title,
+            'jobOpening' => $jobOpening,
+        ]);
+    }
+
     public function create(): View
     {
         return view('pages.admin.job-openings.create', [
@@ -55,6 +64,22 @@ class JobOpeningsController extends Controller
 
         return redirect()->route('admin.job-openings.index')
             ->with('toast', ['type' => 'success', 'message' => 'Job opening created successfully.']);
+    }
+
+    public function edit(JobOpening $jobOpening): View
+    {
+        return view('pages.admin.job-openings.edit', [
+            'title'      => 'Edit Job Opening',
+            'jobOpening' => $jobOpening,
+        ]);
+    }
+
+    public function update(UpdateJobOpeningRequest $request, JobOpening $jobOpening): RedirectResponse
+    {
+        $this->service->update($jobOpening, $request->validated());
+
+        return redirect()->route('admin.job-openings.index')
+            ->with('toast', ['type' => 'success', 'message' => 'Job opening updated successfully.']);
     }
 
     public function destroy(JobOpening $jobOpening): RedirectResponse

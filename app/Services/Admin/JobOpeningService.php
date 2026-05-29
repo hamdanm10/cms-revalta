@@ -6,6 +6,20 @@ use App\Models\JobOpening;
 
 class JobOpeningService
 {
+    public function update(JobOpening $jobOpening, array $data): JobOpening
+    {
+        $jobOpening->update([
+            'title'             => $data['title'],
+            'short_description' => $data['short_description'],
+            'description'       => clean($data['description'], 'quill'),
+            'work_type'         => $data['work_type'],
+            'status'            => $data['status'],
+            'slug'              => $data['slug'],
+        ]);
+
+        return $jobOpening;
+    }
+
     public function destroy(JobOpening $jobOpening): void
     {
         $jobOpening->delete();
