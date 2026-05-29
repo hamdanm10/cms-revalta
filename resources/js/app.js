@@ -1,51 +1,134 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
-import ApexCharts from 'apexcharts';
 
-// flatpickr
-import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-// FullCalendar
-import { Calendar } from '@fullcalendar/core';
-
-
+// Quill
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 
 window.Alpine = Alpine;
-window.ApexCharts = ApexCharts;
-window.flatpickr = flatpickr;
-window.FullCalendar = Calendar;
+
+Alpine.data('quillEditor', (config = {}) => ({
+    quill: null,
+    init() {
+        this.quill = new Quill(this.$refs.editor, {
+            theme: 'snow',
+            placeholder: config.placeholder ?? 'Write something...',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link'],
+                    ['clean'],
+                ],
+            },
+        });
+
+        if (config.value) {
+            this.quill.root.innerHTML = config.value;
+        }
+
+        this.$refs.input.value = config.value ?? '';
+
+        this.quill.on('text-change', () => {
+            this.$refs.input.value = this.quill.root.innerHTML;
+        });
+    },
+}));
+
+Alpine.data('quillEditorImages', (config = {}) => {
+    let quillInstance = null;
+    let lastRange = { index: 0, length: 0 };
+
+    function imageHandler() {
+        const savedRange = { ...lastRange };
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.click();
+        input.onchange = async () => {
+            const file = input.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+
+            try {
+                const res = await fetch(config.uploadUrl, { method: 'POST', body: formData });
+                if (!res.ok) return;
+                const data = await res.json();
+                if (!data.url) return;
+                quillInstance.insertEmbed(savedRange.index, 'image', data.url);
+                quillInstance.setSelection(savedRange.index + 1);
+            } catch {
+                // upload failed silently
+            }
+        };
+    }
+
+    return {
+        init() {
+            quillInstance = new Quill(this.$refs.editor, {
+                theme: 'snow',
+                placeholder: config.placeholder ?? 'Write something...',
+                modules: {
+                    toolbar: {
+                        container: [
+                            [{ header: [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            ['link', 'image'],
+                            ['clean'],
+                        ],
+                        handlers: { image: imageHandler },
+                    },
+                },
+            });
+
+            if (config.value) {
+                quillInstance.root.innerHTML = config.value;
+            }
+
+            this.$refs.input.value = config.value ?? '';
+
+            quillInstance.on('selection-change', (range) => {
+                if (range) lastRange = range;
+            });
+
+            quillInstance.on('text-change', () => {
+                this.$refs.input.value = quillInstance.root.innerHTML;
+            });
+        },
+    };
+});
 
 Alpine.start();
 
 // Initialize components on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Map imports
-    if (document.querySelector('#mapOne')) {
-        import('./components/map').then(module => module.initMap());
+    // Job openings search & filter
+    if (document.querySelector('#job-openings-table')) {
+        import('./components/job-openings').then(module => module.initJobOpenings());
     }
 
-    // Chart imports
-    if (document.querySelector('#chartOne')) {
-        import('./components/chart/chart-1').then(module => module.initChartOne());
-    }
-    if (document.querySelector('#chartTwo')) {
-        import('./components/chart/chart-2').then(module => module.initChartTwo());
-    }
-    if (document.querySelector('#chartThree')) {
-        import('./components/chart/chart-3').then(module => module.initChartThree());
-    }
-    if (document.querySelector('#chartSix')) {
-        import('./components/chart/chart-6').then(module => module.initChartSix());
-    }
-    if (document.querySelector('#chartEight')) {
-        import('./components/chart/chart-8').then(module => module.initChartEight());
-    }
-    if (document.querySelector('#chartThirteen')) {
-        import('./components/chart/chart-13').then(module => module.initChartThirteen());
+    // Portfolio categories search
+    if (document.querySelector('#portfolio-categories-table')) {
+        import('./components/portfolio-categories').then(module => module.initPortfolioCategories());
     }
 
-    // Calendar init
-    if (document.querySelector('#calendar')) {
-        import('./components/calendar-init').then(module => module.calendarInit());
+    // Portfolios search & filter
+    if (document.querySelector('#portfolios-table')) {
+        import('./components/portfolios').then(module => module.initPortfolios());
+    }
+
+    // Blog categories search
+    if (document.querySelector('#blog-categories-table')) {
+        import('./components/blog-categories').then(module => module.initBlogCategories());
+    }
+
+    // Blogs search & filter
+    if (document.querySelector('#blogs-table')) {
+        import('./components/blogs').then(module => module.initBlogs());
     }
 });
