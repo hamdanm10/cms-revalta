@@ -15,6 +15,9 @@
                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Status</p>
                 </th>
                 <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
+                    <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Views</p>
+                </th>
+                <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
                     <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">Created At</p>
                 </th>
                 <th class="px-5 py-3 text-left sm:px-6 text-nowrap">
@@ -45,6 +48,9 @@
                         <span class="inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium {{ $statusClass }}">
                             {{ ucfirst($blog->status) }}
                         </span>
+                    </td>
+                    <td class="px-5 py-4 sm:px-6">
+                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ number_format($blog->views) }}</p>
                     </td>
                     <td class="px-5 py-4 sm:px-6">
                         <p class="text-gray-500 text-theme-sm dark:text-gray-400">

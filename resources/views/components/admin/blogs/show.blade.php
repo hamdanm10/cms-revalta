@@ -57,6 +57,12 @@
                 <p class="break-all font-mono text-sm text-gray-600 dark:text-gray-400">{{ $blog->slug }}</p>
             </div>
 
+            {{-- Views --}}
+            <div>
+                <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">Views</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ number_format($blog->views) }}</p>
+            </div>
+
             {{-- Published At --}}
             @if ($blog->published_at)
                 <div>

@@ -10,7 +10,7 @@ class BlogRepository
     public function paginate(?string $search, ?string $status = null, ?int $categoryId = null, int $perPage = 10): LengthAwarePaginator
     {
         return Blog::query()
-            ->select(['id', 'category_id', 'title', 'status', 'created_at'])
+            ->select(['id', 'category_id', 'title', 'status', 'views', 'created_at'])
             ->with('category:id,name')
             ->when($search, fn($q, $s) => $q->where('title', 'like', '%' . $s . '%'))
             ->when($status, fn($q, $v) => $q->where('status', $v))

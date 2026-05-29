@@ -19,6 +19,7 @@ class Blog extends Model
         'content',
         'status',
         'published_at',
+        'views',
     ];
 
     protected $casts = [
