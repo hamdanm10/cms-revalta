@@ -880,3 +880,57 @@ pre[class*='language-'] {
     margin-right: -60px !important;
   }
 }
+/* ===== Quill Editor ===== */
+.quill-wrapper .ql-toolbar {
+    border-radius: 0.5rem 0.5rem 0 0;
+    border-color: rgb(209 213 219);
+    background-color: transparent;
+}
+.quill-wrapper .ql-container {
+    border-radius: 0 0 0.5rem 0.5rem;
+    border-color: rgb(209 213 219);
+    font-size: 0.875rem;
+}
+.quill-wrapper .ql-editor {
+    min-height: 200px;
+    color: rgb(31 41 55);
+}
+.quill-wrapper .ql-editor.ql-blank::before {
+    color: rgb(156 163 175);
+    font-style: normal;
+}
+
+/* Dark mode */
+.dark .quill-wrapper .ql-toolbar {
+    border-color: rgb(55 65 81);
+    background-color: rgb(17 24 39);
+}
+.dark .quill-wrapper .ql-container {
+    border-color: rgb(55 65 81);
+    background-color: rgb(17 24 39);
+}
+.dark .quill-wrapper .ql-editor {
+    color: rgba(255 255 255 / 0.9);
+}
+.dark .quill-wrapper .ql-editor.ql-blank::before {
+    color: rgba(255 255 255 / 0.3);
+}
+.dark .quill-wrapper .ql-toolbar .ql-stroke {
+    stroke: rgb(156 163 175);
+}
+.dark .quill-wrapper .ql-toolbar .ql-fill {
+    fill: rgb(156 163 175);
+}
+.dark .quill-wrapper .ql-toolbar .ql-picker {
+    color: rgb(156 163 175);
+}
+.dark .quill-wrapper .ql-toolbar .ql-picker-options {
+    background-color: rgb(17 24 39);
+    border-color: rgb(55 65 81);
+}
+
+/* Error state */
+.quill-wrapper.quill-error .ql-toolbar,
+.quill-wrapper.quill-error .ql-container {
+    border-color: rgb(240 68 56);
+}

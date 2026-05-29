@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreJobOpeningRequest;
 use App\Repositories\JobOpeningRepository;
+use App\Services\Admin\JobOpeningService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
@@ -11,7 +14,10 @@ use Illuminate\View\View;
 
 class JobOpeningsController extends Controller
 {
-    public function __construct(private JobOpeningRepository $repository) {}
+    public function __construct(
+        private JobOpeningRepository $repository,
+        private JobOpeningService $service,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -40,6 +46,14 @@ class JobOpeningsController extends Controller
         return view('pages.admin.job-openings.create', [
             'title' => 'Create Job Opening',
         ]);
+    }
+
+    public function store(StoreJobOpeningRequest $request): RedirectResponse
+    {
+        $this->service->store($request->validated());
+
+        return redirect()->route('admin.job-openings.index')
+            ->with('toast', ['type' => 'success', 'message' => 'Job opening created successfully.']);
     }
 
     private function filters(Request $request): array

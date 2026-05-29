@@ -7,13 +7,43 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 // FullCalendar
 import { Calendar } from '@fullcalendar/core';
-
-
+// Quill
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 
 window.Alpine = Alpine;
 window.ApexCharts = ApexCharts;
 window.flatpickr = flatpickr;
 window.FullCalendar = Calendar;
+
+Alpine.data('quillEditor', (config = {}) => ({
+    quill: null,
+    init() {
+        this.quill = new Quill(this.$refs.editor, {
+            theme: 'snow',
+            placeholder: config.placeholder ?? 'Write something...',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link'],
+                    ['clean'],
+                ],
+            },
+        });
+
+        if (config.value) {
+            this.quill.root.innerHTML = config.value;
+        }
+
+        this.$refs.input.value = config.value ?? '';
+
+        this.quill.on('text-change', () => {
+            this.$refs.input.value = this.quill.root.innerHTML;
+        });
+    },
+}));
 
 Alpine.start();
 

@@ -26,7 +26,7 @@
             @forelse($jobOpenings as $job)
                 <tr class="border-b border-gray-100 dark:border-gray-800">
                     <td class="px-5 py-4 sm:px-6">
-                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $job->id }}</p>
+                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">{{ $jobOpenings->firstItem() + $loop->index }}</p>
                     </td>
                     <td class="px-5 py-4 sm:px-6">
                         <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">{{ $job->title }}</p>

@@ -56,9 +56,7 @@
                     <label for="description" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Description <span class="text-error-500">*</span>
                     </label>
-                    <textarea id="description" name="description" rows="8"
-                        placeholder="Full job description, requirements, responsibilities..."
-                        class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 {{ $errors->has('description') ? 'border-error-500 dark:border-error-500' : 'border-gray-300 dark:border-gray-700' }}">{{ old('description') }}</textarea>
+                    <x-form.quill-editor name="description" placeholder="Full job description, requirements, responsibilities..." />
                     @error('description')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
                     @enderror
