@@ -9,8 +9,8 @@
 }" @click.away="closeDropdown()">
     <!-- User Button -->
     <button class="flex items-center text-gray-700 dark:text-gray-400" @click.prevent="toggleDropdown()" type="button">
-        <span class="mr-3 overflow-hidden rounded-full h-11 w-11">
-            <img src="/images/user/owner.png" alt="User" />
+        <span class="mr-3 overflow-hidden rounded-full h-10 w-10">
+            <img src="/images/user/user.png" alt="User" />
         </span>
 
         <span class="block mr-1 font-medium text-theme-sm">{{ auth()->user()?->name ?? 'Guest' }}</span>
