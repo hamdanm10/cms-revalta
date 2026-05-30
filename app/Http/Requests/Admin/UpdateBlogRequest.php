@@ -22,6 +22,7 @@ class UpdateBlogRequest extends FormRequest
             'slug'              => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('blogs', 'slug')->ignore($blog->id)],
             'thumbnail'         => ['nullable', 'image', 'max:2048'],
             'short_description' => ['required', 'string', 'max:255'],
+            'keywords'          => ['required', 'string', 'max:255'],
             'content'           => ['required', 'string'],
             'status'            => ['required', Rule::in(['published', 'draft'])],
         ];

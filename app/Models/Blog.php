@@ -13,6 +13,7 @@ class Blog extends Model
         'slug',
         'thumbnail',
         'short_description',
+        'keywords',
         'content',
         'status',
         'published_at',

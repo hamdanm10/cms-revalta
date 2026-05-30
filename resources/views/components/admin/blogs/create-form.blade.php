@@ -57,6 +57,21 @@
                     @enderror
                 </div>
 
+                {{-- Keywords --}}
+                <div>
+                    <label for="keywords" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                        Keywords <span class="text-error-500">*</span> <span class="text-xs font-normal text-gray-400">(SEO)</span>
+                    </label>
+                    <input type="text" id="keywords" name="keywords"
+                        value="{{ old('keywords') }}"
+                        placeholder="e.g. laravel, php, web development"
+                        class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 {{ $errors->has('keywords') ? 'border-error-500 dark:border-error-500' : 'border-gray-300 dark:border-gray-700' }}" />
+                    <p class="mt-1.5 text-xs text-gray-400 dark:text-gray-600">Separate keywords with commas. Used for meta keywords tag.</p>
+                    @error('keywords')
+                        <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 {{-- Content --}}
                 <div>
                     <label for="content" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
