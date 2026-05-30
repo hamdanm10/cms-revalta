@@ -54,6 +54,7 @@ class BlogService
 
     public function destroy(Blog $blog): void
     {
+        Storage::disk('public')->delete($blog->thumbnail);
         $blog->delete();
     }
 

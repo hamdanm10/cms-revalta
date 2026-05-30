@@ -45,6 +45,7 @@ class PortfolioService
 
     public function destroy(Portfolio $portfolio): void
     {
+        Storage::disk('public')->delete($portfolio->thumbnail);
         $portfolio->delete();
     }
 

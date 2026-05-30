@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('slug')->unique();
             $table->enum('status', ['published', 'draft'])->default('draft');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
