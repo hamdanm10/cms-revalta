@@ -53,7 +53,7 @@ class BlogRepository
             ->where('status', 'published')
             ->when($search, fn($q, $s) => $q->where('title', 'like', '%' . $s . '%'))
             ->when($categoryId, fn($q, $v) => $q->where('category_id', $v))
-            ->latest()
+            ->latest('published_at')
             ->paginate($perPage)
             ->through(function ($blog) {
                 $blog->category?->makeHidden('id');
