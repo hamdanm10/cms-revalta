@@ -30,6 +30,12 @@
                 <p class="text-sm text-gray-600 dark:text-gray-400">{{ $blog->short_description }}</p>
             </div>
 
+            {{-- Keywords --}}
+            <div>
+                <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">Keywords</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $blog->keywords ?? '-' }}</p>
+            </div>
+
             {{-- Category --}}
             <div>
                 <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">Category</p>
