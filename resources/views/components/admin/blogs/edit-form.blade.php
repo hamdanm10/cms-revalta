@@ -91,7 +91,7 @@
                         Thumbnail <span class="text-xs font-normal text-gray-400">(Recommended size: 1536x1024px)</span>
                     </label>
                     <div class="space-y-3">
-                        <img :src="thumbnailPreview ?? '{{ Storage::url($blog->thumbnail) }}'"
+                        <img :src="thumbnailPreview ?? '{{ $blog->thumbnail }}'"
                             alt="{{ $blog->title }}" class="h-40 w-full rounded-lg object-cover" />
                         <input type="file" id="thumbnail" name="thumbnail" accept="image/*"
                             @change="onThumbnailChange($event)"

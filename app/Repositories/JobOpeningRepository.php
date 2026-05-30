@@ -22,7 +22,7 @@ class JobOpeningRepository
     public function paginateApi(?string $search, ?string $workType = null, ?string $status = null, int $perPage = 10): LengthAwarePaginator
     {
         return JobOpening::query()
-            ->select(['id', 'title', 'short_description', 'description', 'work_type', 'status', 'slug', 'created_at'])
+            ->select(['title', 'short_description', 'description', 'work_type', 'status', 'slug', 'created_at'])
             ->when($search, fn($q, $s) => $q->where('title', 'like', '%' . $s . '%'))
             ->when($workType, fn($q, $v) => $q->where('work_type', $v))
             ->when($status, fn($q, $v) => $q->where('status', $v))

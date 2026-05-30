@@ -3,7 +3,7 @@
     {{-- Description Preview --}}
     <div class="xl:col-span-2 space-y-6">
         <x-common.component-card title="Thumbnail">
-            <img src="{{ Storage::url($portfolio->thumbnail) }}" alt="{{ $portfolio->title }}"
+            <img src="{{ $portfolio->thumbnail }}" alt="{{ $portfolio->title }}"
                 class="w-full rounded-lg object-cover" />
         </x-common.component-card>
 
