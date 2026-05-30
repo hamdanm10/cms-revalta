@@ -61,10 +61,9 @@
                     <label for="content" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Content <span class="text-error-500">*</span>
                     </label>
-                    <x-form.quill-editor-with-images
+                    <x-form.quill-editor
                         name="content"
                         :value="old('content', $blog->content)"
-                        :upload-url="route('admin.blogs.upload-image')"
                         placeholder="Write your blog content here..." />
                     @error('content')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
