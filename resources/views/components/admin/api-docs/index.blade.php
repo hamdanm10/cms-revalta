@@ -87,6 +87,40 @@
     }
 }' />
 
+    {{-- Blog Categories --}}
+    <x-admin.api-docs.endpoint-card
+        method="GET"
+        endpoint="/api/blog-categories"
+        title="List Blog Categories"
+        description="Retrieve all blog categories."
+        :params="[]"
+        response='{
+    "status": "success",
+    "data": {
+        "categories": [
+            { "id": 1, "name": "Technology" },
+            { "id": 2, "name": "Design" }
+        ]
+    }
+}' />
+
+    {{-- Portfolio Categories --}}
+    <x-admin.api-docs.endpoint-card
+        method="GET"
+        endpoint="/api/portfolio-categories"
+        title="List Portfolio Categories"
+        description="Retrieve all portfolio categories."
+        :params="[]"
+        response='{
+    "status": "success",
+    "data": {
+        "categories": [
+            { "id": 1, "name": "Web Development" },
+            { "id": 2, "name": "Mobile App" }
+        ]
+    }
+}' />
+
     {{-- Portfolios --}}
     <x-admin.api-docs.endpoint-card
         method="GET"
@@ -101,7 +135,17 @@
         response='{
     "status": "success",
     "data": {
-        "portfolios": [...],
+        "portfolios": [
+            {
+                "title": "Company Website Redesign",
+                "short_description": "...",
+                "description": "<p>...</p>",
+                "thumbnail": "https://domain.com/storage/portfolios/image.png",
+                "slug": "company-website-redesign",
+                "status": "published",
+                "category": { "name": "Web Development" }
+            }
+        ],
         "pagination": {
             "total": 15,
             "per_page": 10,
@@ -116,7 +160,7 @@
         method="GET"
         endpoint="/api/blogs"
         title="List Blogs"
-        description="Retrieve a paginated list of published blogs. Content field is excluded."
+        description="Retrieve a paginated list of published blogs, ordered by latest published date. Content field is excluded."
         :params="[
             ['name' => 'search', 'type' => 'string', 'required' => false, 'description' => 'Filter by title'],
             ['name' => 'category_id', 'type' => 'integer', 'required' => false, 'description' => 'Filter by category ID'],
@@ -125,7 +169,18 @@
         response='{
     "status": "success",
     "data": {
-        "blogs": [...],
+        "blogs": [
+            {
+                "title": "Blog Title",
+                "slug": "blog-title",
+                "thumbnail": "https://domain.com/storage/blogs/image.png",
+                "short_description": "...",
+                "status": "published",
+                "published_at": "2026-01-01T00:00:00.000000Z",
+                "views": 100,
+                "category": { "name": "Technology" }
+            }
+        ],
         "pagination": {
             "total": 30,
             "per_page": 10,
@@ -140,7 +195,7 @@
         method="GET"
         endpoint="/api/blogs/{slug}"
         title="Show Blog"
-        description="Retrieve a single published blog by its slug including content."
+        description="Retrieve a single published blog by its slug including full content."
         :params="[
             ['name' => 'slug', 'type' => 'string', 'required' => true, 'description' => 'The blog slug (URL parameter)'],
         ]"
@@ -148,16 +203,16 @@
     "status": "success",
     "data": {
         "blog": {
-            "id": 1,
             "title": "Blog Title",
             "slug": "blog-title",
-            "thumbnail": "portfolios/image.png",
+            "thumbnail": "https://domain.com/storage/blogs/image.png",
             "short_description": "...",
-            "content": "...",
+            "keywords": "laravel, php, web development",
+            "content": "<p>...</p>",
             "status": "published",
             "published_at": "2026-01-01T00:00:00.000000Z",
             "views": 100,
-            "category": { "id": 1, "name": "Technology" }
+            "category": { "name": "Technology" }
         }
     }
 }' />
