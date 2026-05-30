@@ -44,7 +44,8 @@
 
                 {{-- Short Description --}}
                 <div>
-                    <label for="short_description" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                    <label for="short_description"
+                        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Short Description <span class="text-error-500">*</span>
                     </label>
                     <input type="text" id="short_description" name="short_description"
@@ -59,13 +60,14 @@
                 {{-- Keywords --}}
                 <div>
                     <label for="keywords" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                        Keywords <span class="text-error-500">*</span> <span class="text-xs font-normal text-gray-400">(SEO)</span>
+                        Keywords <span class="text-error-500">*</span> <span
+                            class="text-xs font-normal text-gray-400">(SEO)</span>
                     </label>
-                    <input type="text" id="keywords" name="keywords"
-                        value="{{ old('keywords', $blog->keywords) }}"
+                    <input type="text" id="keywords" name="keywords" value="{{ old('keywords', $blog->keywords) }}"
                         placeholder="e.g. laravel, php, web development"
                         class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 {{ $errors->has('keywords') ? 'border-error-500 dark:border-error-500' : 'border-gray-300 dark:border-gray-700' }}" />
-                    <p class="mt-1.5 text-xs text-gray-400 dark:text-gray-600">Separate keywords with commas. Used for meta keywords tag.</p>
+                    <p class="mt-1.5 text-xs text-gray-400 dark:text-gray-600">Separate keywords with commas. Used for
+                        meta keywords tag.</p>
                     @error('keywords')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
                     @enderror
@@ -76,9 +78,7 @@
                     <label for="content" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Content <span class="text-error-500">*</span>
                     </label>
-                    <x-form.quill-editor
-                        name="content"
-                        :value="old('content', $blog->content)"
+                    <x-form.quill-editor name="content" :value="old('content', $blog->content)"
                         placeholder="Write your blog content here..." />
                     @error('content')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
@@ -88,7 +88,7 @@
                 {{-- Thumbnail --}}
                 <div>
                     <label for="thumbnail" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                        Thumbnail
+                        Thumbnail <span class="text-xs font-normal text-gray-400">(Recommended size: 1536x1024px)</span>
                     </label>
                     <div class="space-y-3">
                         <img :src="thumbnailPreview ?? '{{ Storage::url($blog->thumbnail) }}'"
@@ -96,7 +96,8 @@
                         <input type="file" id="thumbnail" name="thumbnail" accept="image/*"
                             @change="onThumbnailChange($event)"
                             class="w-full rounded-lg border px-4 py-2.5 text-sm text-gray-700 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-600 hover:file:bg-brand-100 dark:text-gray-300 dark:file:bg-brand-500/10 dark:file:text-brand-400 {{ $errors->has('thumbnail') ? 'border-error-500 dark:border-error-500' : 'border-gray-300 dark:border-gray-700' }}" />
-                        <p class="text-xs text-gray-400 dark:text-gray-600">Leave empty to keep the current thumbnail. Accepted: JPG, PNG, WebP. Max 2MB.</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-600">Leave empty to keep the current thumbnail.
+                            Accepted: JPG, PNG, WebP. Max 2MB.</p>
                     </div>
                     @error('thumbnail')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
@@ -124,15 +125,19 @@
                                 Select category
                             </option>
                             @foreach ($categories as $cat)
-                                <option value="{{ $cat->id }}" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+                                <option value="{{ $cat->id }}"
+                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
                                     {{ old('category_id', $blog->category_id) == $cat->id ? 'selected' : '' }}>
                                     {{ $cat->name }}
                                 </option>
                             @endforeach
                         </select>
-                        <span class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <span
+                            class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
                     </div>
@@ -154,9 +159,12 @@
                             <option value="published" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
                                 {{ old('status', $blog->status) === 'published' ? 'selected' : '' }}>Published</option>
                         </select>
-                        <span class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <span
+                            class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke=""
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
                     </div>
