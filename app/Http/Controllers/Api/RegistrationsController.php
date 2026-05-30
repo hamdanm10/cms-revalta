@@ -22,7 +22,6 @@ class RegistrationsController extends Controller
             'message' => 'Registration successful.',
             'data'    => [
                 'user' => [
-                    'id'    => $user->id,
                     'name'  => $user->name,
                     'email' => $user->email,
                 ],

@@ -39,11 +39,10 @@ return [
         ],
         'quill_blog' => [
             'HTML.Doctype'             => 'HTML 4.01 Transitional',
-            'HTML.Allowed'             => 'p,br,strong,em,u,s,h1,h2,h3,ol,ul,li,a[href|target|rel],span,blockquote,img[src|alt|width|height]',
+            'HTML.Allowed'             => 'p,br,strong,em,u,s,h1,h2,h3,ol,ul,li,a[href|target|rel],span,blockquote',
             'CSS.AllowedProperties'    => '',
             'AutoFormat.RemoveEmpty'   => true,
             'Attr.AllowedRel'          => 'noopener noreferrer',
-            'URI.AllowedSchemes'       => ['http' => true, 'https' => true],
         ],
         'test'    => [
             'Attr.EnableID' => 'true',

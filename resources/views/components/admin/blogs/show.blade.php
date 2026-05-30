@@ -3,7 +3,7 @@
     {{-- Content Preview --}}
     <div class="xl:col-span-2 space-y-6">
         <x-common.component-card title="Thumbnail">
-            <img src="{{ Storage::url($blog->thumbnail) }}" alt="{{ $blog->title }}"
+            <img src="{{ $blog->thumbnail }}" alt="{{ $blog->title }}"
                 class="w-full rounded-lg object-cover" />
         </x-common.component-card>
 
@@ -28,6 +28,12 @@
             <div>
                 <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">Short Description</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400">{{ $blog->short_description }}</p>
+            </div>
+
+            {{-- Keywords --}}
+            <div>
+                <p class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">Keywords</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $blog->keywords ?? '-' }}</p>
             </div>
 
             {{-- Category --}}

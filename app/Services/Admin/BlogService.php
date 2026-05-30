@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Blog;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogService
 {
@@ -16,6 +17,7 @@ class BlogService
             'slug'              => $data['slug'],
             'thumbnail'         => $this->uploadThumbnail($data['thumbnail']),
             'short_description' => $data['short_description'],
+            'keywords'          => $data['keywords'],
             'content'           => clean($data['content'], 'quill_blog'),
             'status'            => $data['status'],
             'published_at'      => $data['status'] === 'published' ? now() : null,
@@ -27,7 +29,7 @@ class BlogService
         $thumbnail = $blog->thumbnail;
 
         if (isset($data['thumbnail']) && $data['thumbnail'] instanceof UploadedFile) {
-            Storage::disk('public')->delete($thumbnail);
+            Storage::disk('public')->delete($this->storagePath($thumbnail));
             $thumbnail = $this->uploadThumbnail($data['thumbnail']);
         }
 
@@ -44,6 +46,7 @@ class BlogService
             'slug'              => $data['slug'],
             'thumbnail'         => $thumbnail,
             'short_description' => $data['short_description'],
+            'keywords'          => $data['keywords'],
             'content'           => clean($data['content'], 'quill_blog'),
             'status'            => $data['status'],
             'published_at'      => $publishedAt,
@@ -54,6 +57,7 @@ class BlogService
 
     public function destroy(Blog $blog): void
     {
+        Storage::disk('public')->delete($this->storagePath($blog->thumbnail));
         $blog->delete();
     }
 
@@ -64,6 +68,13 @@ class BlogService
 
     private function uploadThumbnail(UploadedFile $file): string
     {
-        return $file->store('blogs', 'public');
+        $path = $file->store('blogs', 'public');
+
+        return Storage::disk('public')->url($path);
+    }
+
+    private function storagePath(string $url): string
+    {
+        return Str::after($url, Storage::disk('public')->url(''));
     }
 }

@@ -15,7 +15,7 @@ A content management system built with **Laravel 12**, **Tailwind CSS v4**, **Al
 
 ### Admin Panel
 - **Dashboard** — Overview stats for blogs, portfolios, and job openings
-- **Blogs** — Full CRUD with category, thumbnail, rich-text content (Quill editor), status (published/draft), and view tracking
+- **Blogs** — Full CRUD with category, thumbnail, rich-text content (Quill editor), SEO keywords, status (published/draft), and view tracking
 - **Blog Categories** — Full CRUD
 - **Portfolios** — Full CRUD with category, thumbnail, and status
 - **Portfolio Categories** — Full CRUD
@@ -34,10 +34,14 @@ X-API-Token: <your-api-token>
 |--------|----------|-------------|
 | `POST` | `/api/registrations` | Register a new user |
 | `GET` | `/api/job-openings` | List published job openings (paginated) |
+| `GET` | `/api/blog-categories` | List all blog categories |
+| `GET` | `/api/portfolio-categories` | List all portfolio categories |
 | `GET` | `/api/portfolios` | List published portfolios (paginated) |
-| `GET` | `/api/blogs` | List published blogs (paginated, excludes content) |
-| `GET` | `/api/blogs/{slug}` | Get a single blog by slug (includes content) |
+| `GET` | `/api/blogs` | List published blogs (paginated, ordered by `published_at`, excludes content) |
+| `GET` | `/api/blogs/{slug}` | Get a single blog by slug (includes content and keywords) |
 | `POST` | `/api/blogs/{slug}/views` | Increment view count for a blog |
+
+> Thumbnail fields are returned as full absolute URLs (e.g. `https://domain.com/storage/blogs/image.png`).
 
 ## Requirements
 

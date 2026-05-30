@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('blog_categories');
             $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamp('published_at')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

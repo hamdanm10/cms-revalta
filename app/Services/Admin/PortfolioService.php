@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Portfolio;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PortfolioService
 {
@@ -26,7 +27,7 @@ class PortfolioService
         $thumbnail = $portfolio->thumbnail;
 
         if (isset($data['thumbnail']) && $data['thumbnail'] instanceof UploadedFile) {
-            Storage::disk('public')->delete($thumbnail);
+            Storage::disk('public')->delete($this->storagePath($thumbnail));
             $thumbnail = $this->uploadThumbnail($data['thumbnail']);
         }
 
@@ -45,11 +46,19 @@ class PortfolioService
 
     public function destroy(Portfolio $portfolio): void
     {
+        Storage::disk('public')->delete($this->storagePath($portfolio->thumbnail));
         $portfolio->delete();
     }
 
     private function uploadThumbnail(UploadedFile $file): string
     {
-        return $file->store('portfolios', 'public');
+        $path = $file->store('portfolios', 'public');
+
+        return Storage::disk('public')->url($path);
+    }
+
+    private function storagePath(string $url): string
+    {
+        return Str::after($url, Storage::disk('public')->url(''));
     }
 }

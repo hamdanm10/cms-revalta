@@ -44,7 +44,8 @@
 
                 {{-- Short Description --}}
                 <div>
-                    <label for="short_description" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                    <label for="short_description"
+                        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                         Short Description <span class="text-error-500">*</span>
                     </label>
                     <input type="text" id="short_description" name="short_description"
@@ -71,15 +72,16 @@
                 {{-- Thumbnail --}}
                 <div>
                     <label for="thumbnail" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                        Thumbnail
+                        Thumbnail <span class="text-xs font-normal text-gray-400">(Recommended size: 1920x1200px)</span>
                     </label>
                     <div class="space-y-3">
-                        <img :src="thumbnailPreview ?? '{{ Storage::url($portfolio->thumbnail) }}'"
+                        <img :src="thumbnailPreview ?? '{{ $portfolio->thumbnail }}'"
                             alt="{{ $portfolio->title }}" class="h-40 w-full rounded-lg object-cover" />
                         <input type="file" id="thumbnail" name="thumbnail" accept="image/*"
                             @change="onThumbnailChange($event)"
                             class="w-full rounded-lg border px-4 py-2.5 text-sm text-gray-700 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-600 hover:file:bg-brand-100 dark:text-gray-300 dark:file:bg-brand-500/10 dark:file:text-brand-400 {{ $errors->has('thumbnail') ? 'border-error-500 dark:border-error-500' : 'border-gray-300 dark:border-gray-700' }}" />
-                        <p class="text-xs text-gray-400 dark:text-gray-600">Leave empty to keep the current thumbnail. Accepted: JPG, PNG, WebP. Max 2MB.</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-600">Leave empty to keep the current thumbnail.
+                            Accepted: JPG, PNG, WebP. Max 2MB.</p>
                     </div>
                     @error('thumbnail')
                         <p class="mt-1.5 text-sm text-error-500">{{ $message }}</p>
@@ -107,15 +109,19 @@
                                 Select category
                             </option>
                             @foreach ($categories as $cat)
-                                <option value="{{ $cat->id }}" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+                                <option value="{{ $cat->id }}"
+                                    class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
                                     {{ old('category_id', $portfolio->category_id) == $cat->id ? 'selected' : '' }}>
                                     {{ $cat->name }}
                                 </option>
                             @endforeach
                         </select>
-                        <span class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <span
+                            class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
                     </div>
@@ -135,11 +141,15 @@
                             <option value="draft" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
                                 {{ old('status', $portfolio->status) === 'draft' ? 'selected' : '' }}>Draft</option>
                             <option value="published" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
-                                {{ old('status', $portfolio->status) === 'published' ? 'selected' : '' }}>Published</option>
+                                {{ old('status', $portfolio->status) === 'published' ? 'selected' : '' }}>Published
+                            </option>
                         </select>
-                        <span class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <span
+                            class="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
                     </div>

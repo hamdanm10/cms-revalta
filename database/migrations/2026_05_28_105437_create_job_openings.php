@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('work_type', ['remote', 'wfa', 'wfo', 'hybrid']);
             $table->enum('status', ['open', 'closed'])->default('open');
             $table->string('slug')->unique();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class StoreBlogRequest extends FormRequest
             'slug'              => ['required', 'string', 'max:255', 'unique:blogs,slug', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
             'thumbnail'         => ['required', 'image', 'max:2048'],
             'short_description' => ['required', 'string', 'max:255'],
+            'keywords'          => ['required', 'string', 'max:255'],
             'content'           => ['required', 'string'],
             'status'            => ['required', Rule::in(['published', 'draft'])],
         ];
